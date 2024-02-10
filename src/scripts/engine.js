@@ -4,20 +4,31 @@ const state = {
     },
     values: {
         points: 5,
+        emojis: ['🤑', '🤑',  '😱',  '😱',  '😡',  '😡',  '🤡',  '🤡',  '👹',  '👹',  '😺',  '😺',  '🦝',  '🦝',  '🦊',  '🦊'],
+        openCards: []
     }
 }
 
-const emojis = ['🤑', '🤑',  '😱',  '😱',  '😡',  '😡',  '🤡',  '🤡',  '👹',  '👹',  '😺',  '😺',  '🦝',  '🦝',  '🦊',  '🦊'];
-let openCards = [];
+let shuffleEmojis = state.values.emojis.sort(() => (Math.random() > 0.5) ? 2 : -1);
 
-let shuffleEmojis = emojis.sort(() => (Math.random() > 0.5) ? 2 : -1);
-
-for (let i = 0; i < emojis.length; i++) {
+for (let i = 0; i < state.values.emojis.length; i++) {
     let box = document.createElement('div');
     box.className = 'item';
     box.innerHTML = shuffleEmojis[i];
     box.onclick = handleClick;
-    document.querySelector('.game').appendChild(box);    
+    document.querySelector('.game').appendChild(box);
+}
+
+function showCards() {
+    document.querySelectorAll('.item').forEach((item) => {
+        item.classList.add('boxOpen');
+    });
+}
+
+function hideCards() {
+    document.querySelectorAll('.item').forEach((item) => {
+        item.classList.remove('boxOpen');
+    });
 }
 
 function handleClick() {
@@ -62,7 +73,14 @@ function checkMatch() {
 
     openCards = [];
 
-    if (document.querySelectorAll('.boxMatch').length === emojis.length) {
+    if (document.querySelectorAll('.boxMatch').length === state.values.emojis.length) {
         alert('Você venceu!');
     }
 }
+
+function init() {
+    setTimeout(showCards, 0);
+    setTimeout(hideCards, 3000);
+}
+
+init();
