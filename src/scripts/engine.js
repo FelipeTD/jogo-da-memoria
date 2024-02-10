@@ -1,3 +1,12 @@
+const state = {
+    view: {
+        points: document.querySelector('#pontuacao'),
+    },
+    values: {
+        points: 5,
+    }
+}
+
 const emojis = ['🤑', '🤑',  '😱',  '😱',  '😡',  '😡',  '🤡',  '🤡',  '👹',  '👹',  '😺',  '😺',  '🦝',  '🦝',  '🦊',  '🦊'];
 let openCards = [];
 
@@ -22,13 +31,33 @@ function handleClick() {
     }
 }
 
+function gameOver() {
+    alert('Game Over! Você perdeu');
+    window.location.reload();
+}
+
+function points(option) {
+    if (option === 'diminuir') {
+        state.values.points--;
+    } else {
+        state.values.points++;
+    }
+    state.view.points.textContent = state.values.points;
+
+    if (state.values.points < 0) {
+        gameOver();
+    }
+}
+
 function checkMatch() {
     if (openCards[0].innerHTML === openCards[1].innerHTML) {
         openCards[0].classList.add('boxMatch');
         openCards[1].classList.add('boxMatch');
+        points('somar');
     } else {
         openCards[0].classList.remove('boxOpen');
         openCards[1].classList.remove('boxOpen');
+        points('diminuir');
     }
 
     openCards = [];
