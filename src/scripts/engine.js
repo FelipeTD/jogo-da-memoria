@@ -32,12 +32,12 @@ function hideCards() {
 }
 
 function handleClick() {
-    if (openCards.length < 2) {
+    if (state.values.openCards.length < 2) {
         this.classList.add("boxOpen");
-        openCards.push(this);
+        state.values.openCards.push(this);
     }
 
-    if (openCards.length === 2) {
+    if (state.values.openCards.length === 2) {
         setTimeout(checkMatch, 500);
     }
 }
@@ -61,17 +61,17 @@ function points(option) {
 }
 
 function checkMatch() {
-    if (openCards[0].innerHTML === openCards[1].innerHTML) {
-        openCards[0].classList.add('boxMatch');
-        openCards[1].classList.add('boxMatch');
+    if (state.values.openCards[0].innerHTML === state.values.openCards[1].innerHTML) {
+        state.values.openCards[0].classList.add('boxMatch');
+        state.values.openCards[1].classList.add('boxMatch');
         points('somar');
     } else {
-        openCards[0].classList.remove('boxOpen');
-        openCards[1].classList.remove('boxOpen');
+        state.values.openCards[0].classList.remove('boxOpen');
+        state.values.openCards[1].classList.remove('boxOpen');
         points('diminuir');
     }
 
-    openCards = [];
+    state.values.openCards = [];
 
     if (document.querySelectorAll('.boxMatch').length === state.values.emojis.length) {
         alert('Você venceu!');
