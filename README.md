@@ -27,3 +27,9 @@
 
 ### Entendendo o desafio
 - Entregar desafio no github
+
+### Extras
+- Adicionando sistema de vidas
+- Ao acertar uma carta ganha uma vida
+- Ao errar uma carta perde uma vida
+- Se ficar com 0 vidas o jogo acaba

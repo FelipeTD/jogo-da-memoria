@@ -44,7 +44,7 @@ function points(option) {
     }
     state.view.points.textContent = state.values.points;
 
-    if (state.values.points < 0) {
+    if (state.values.points <= 0) {
         gameOver();
     }
 }
